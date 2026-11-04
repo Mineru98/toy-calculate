@@ -1,0 +1,9 @@
+$ npm run typecheck
+# commit 8325574 · 2026-11-05T02:41:48+09:00 · node v24.22.1
+
+
+> toy-calculate@0.0.0 typecheck
+> tsc --noEmit
+
+
+# exit=0
