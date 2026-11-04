@@ -13,7 +13,7 @@
 | `npm run build` exit | 0 | 0 | - |
 | 프로브 19건 중 기대값 일치 | 1 | 19 | **+18** |
 
-프로브 결과 (`.issue/3/evidence/probe.ts`):
+프로브 결과 ([`probe.ts`](https://github.com/Mineru98/toy-calculate/blob/main/.issue/3/evidence/probe.ts)):
 
 | 입력 | 전 | 후 |
 | --- | --- | --- |
@@ -29,7 +29,7 @@
 | `foo(1)` | UNKNOWN_CHARACTER | UNKNOWN_FUNCTION |
 | `2+3*4` (E1) | 14 | 14 |
 
-원본 출력: [before](../tree/main/.issue/3/evidence/before) · [after](../tree/main/.issue/3/evidence/after)
+원본 출력: [before](https://github.com/Mineru98/toy-calculate/tree/main/.issue/3/evidence/before) · [after](https://github.com/Mineru98/toy-calculate/tree/main/.issue/3/evidence/after)
 
 ## 결정 사항
 
