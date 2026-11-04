@@ -7,3 +7,9 @@
   box-shadow: var(--shadow-glass);
   padding: var(--space-6);
 }
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: var(--color-glass-fallback);
+  }
+}
