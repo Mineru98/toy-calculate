@@ -18,6 +18,24 @@
   min-width: 0;
 }
 
+.calculator__angle {
+  align-self: flex-start;
+  padding: var(--space-1) var(--space-2);
+  font: inherit;
+  font-size: calc(var(--font-size-btn) * 0.7);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--color-btn-function-text);
+  background: var(--color-btn-function);
+  border: var(--border-glass);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+.calculator__angle:hover {
+  background: var(--color-btn-function-hover);
+}
+
 .calculator__expression,
 .calculator__result {
   max-width: 100%;
@@ -49,6 +67,18 @@
   gap: var(--space-3);
 }
 
+.calculator__scientific {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.calculator__scientific .btn {
+  min-height: calc(var(--size-btn) * 0.75);
+  font-size: calc(var(--font-size-btn) * 0.8);
+}
+
+.calculator__scientific .btn,
 .calculator__keypad .btn {
   min-width: 0;
   padding-inline: 0;
