@@ -1,10 +1,12 @@
 import { failure, type CalcFailure } from './result';
 
 export type Operator = '+' | '-' | '*' | '/' | '^';
+export type PostfixOperator = '!' | '%';
 
 export type Token =
   | { type: 'number'; value: number; position: number }
   | { type: 'operator'; value: Operator; position: number }
+  | { type: 'postfix'; value: PostfixOperator; position: number }
   | { type: 'paren'; value: '(' | ')'; position: number };
 
 const OPERATORS = new Set<string>(['+', '-', '*', '/', '^']);
@@ -44,6 +46,12 @@ export function tokenize(input: string): { ok: true; tokens: Token[] } | CalcFai
 
     if (OPERATORS.has(ch)) {
       tokens.push({ type: 'operator', value: ch as Operator, position: i });
+      i++;
+      continue;
+    }
+
+    if (ch === '!' || ch === '%') {
+      tokens.push({ type: 'postfix', value: ch, position: i });
       i++;
       continue;
     }
