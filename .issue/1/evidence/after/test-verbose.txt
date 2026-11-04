@@ -1,0 +1,53 @@
+$ npx vitest run --reporter=verbose
+# commit 66a5575 · 2026-11-05T00:17:59+09:00 · node v24.22.1
+
+ RUN  v2.1.9 /home/mineru/workspace/toy-calculate-issue-1
+
+ ✓ src/engine/engine.test.ts > calculate — 성공 > 2+3*4 = 14
+ ✓ src/engine/engine.test.ts > calculate — 성공 > (2+3)*4 = 20
+ ✓ src/engine/engine.test.ts > calculate — 성공 > 2^3^2 = 512
+ ✓ src/engine/engine.test.ts > calculate — 성공 > -2^2 = -4
+ ✓ src/engine/engine.test.ts > calculate — 성공 > (-2)^2 = 4
+ ✓ src/engine/engine.test.ts > calculate — 성공 > 2^-2 = 0.25
+ ✓ src/engine/engine.test.ts > calculate — 성공 > 10-4-3 = 3
+ ✓ src/engine/engine.test.ts > calculate — 성공 > 24/4/2 = 3
+ ✓ src/engine/engine.test.ts > calculate — 성공 > 1.5+.5 = 2
+ ✓ src/engine/engine.test.ts > calculate — 성공 > 2*-3 = -6
+ ✓ src/engine/engine.test.ts > calculate — 성공 > 2--3 = 5
+ ✓ src/engine/engine.test.ts > calculate — 성공 > --2 = 2
+ ✓ src/engine/engine.test.ts > calculate — 성공 >  7 * ( 1 + 2 )  = 21
+ ✓ src/engine/engine.test.ts > calculate — 성공 > ((3)) = 3
+ ✓ src/engine/engine.test.ts > calculate — 성공 > 0/5 = 0
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > '' → EMPTY_INPUT
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > '   ' → EMPTY_INPUT
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > '(2+3' → MISMATCHED_PARENTHESIS
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > '2+3)' → MISMATCHED_PARENTHESIS
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > ')(' → MISMATCHED_PARENTHESIS
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > '2+*3' → UNEXPECTED_TOKEN
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > '2**3' → UNEXPECTED_TOKEN
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > '*2' → UNEXPECTED_TOKEN
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > '2+' → UNEXPECTED_TOKEN
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > '()' → UNEXPECTED_TOKEN
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > '(2+)' → UNEXPECTED_TOKEN
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > '(2+' → MISMATCHED_PARENTHESIS
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > '(' → MISMATCHED_PARENTHESIS
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > '2 3' → UNEXPECTED_TOKEN
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > '2(3)' → UNEXPECTED_TOKEN
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > '2a' → UNKNOWN_CHARACTER
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > '2#3' → UNKNOWN_CHARACTER
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > '1.2.3' → INVALID_NUMBER
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > '.' → INVALID_NUMBER
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > '1/0' → DIVISION_BY_ZERO
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > '5/(2-2)' → DIVISION_BY_ZERO
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > 깊게 중첩된 수식은 TOO_DEEP (길이 0)
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > 깊게 중첩된 수식은 TOO_DEEP (길이 1)
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > 깊게 중첩된 수식은 TOO_DEEP (길이 2)
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > 깊게 중첩된 수식은 TOO_DEEP (길이 3)
+ ✓ src/engine/engine.test.ts > calculate — 오류 결과 (예외 없음) > 오류 위치를 함께 돌려준다
+
+ Test Files  1 passed (1)
+      Tests  41 passed (41)
+   Start at  00:17:59
+   Duration  373ms (transform 71ms, setup 0ms, collect 77ms, tests 67ms, environment 0ms, prepare 60ms)
+
+# exit=0

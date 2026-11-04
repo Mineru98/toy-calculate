@@ -1,0 +1,13 @@
+$ ls src src/engine
+src:
+engine
+main.ts
+
+src/engine:
+engine.test.ts
+evaluate.ts
+index.ts
+parse.ts
+result.ts
+tokenize.ts
+# exit=0
