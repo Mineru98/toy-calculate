@@ -1,0 +1,18 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--color-text);
+  background: linear-gradient(135deg, var(--color-bg-from), var(--color-bg-via), var(--color-bg-to));
+  background-attachment: fixed;
+}
+
+#app {
+  padding: var(--space-8) var(--space-4);
+}
