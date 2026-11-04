@@ -1,0 +1,21 @@
+$ vite-node probe.ts  # 8efc581
+DEG sin(90)    → ok 1
+RAD sin(π/2)   → ok 1
+DEG asin(1)    → ok 90
+DEG sin(180)   → ok 0
+DEG cos(60)    → ok 0.5
+DEG tan(45)    → ok 1
+DEG tan(90)    → error DOMAIN_ERROR
+RAD log(1000)  → ok 3
+RAD ln(e)      → ok 1
+RAD sqrt(16)   → ok 4
+RAD abs(-3)    → ok 3
+RAD 2*pi       → ok 6.283185307179586
+RAD sqrt(-1)   → error DOMAIN_ERROR
+RAD log(0)     → error DOMAIN_ERROR
+RAD ln(-1)     → error DOMAIN_ERROR
+DEG asin(2)    → error DOMAIN_ERROR
+DEG acos(-2)   → error DOMAIN_ERROR
+RAD foo(1)     → error UNKNOWN_FUNCTION
+RAD 2+3*4      → ok 14
+exit=0

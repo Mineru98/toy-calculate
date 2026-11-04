@@ -1,0 +1,21 @@
+$ vite-node probe.ts  # 6312d07
+DEG sin(90)    → error UNKNOWN_CHARACTER
+RAD sin(π/2)   → error UNKNOWN_CHARACTER
+DEG asin(1)    → error UNKNOWN_CHARACTER
+DEG sin(180)   → error UNKNOWN_CHARACTER
+DEG cos(60)    → error UNKNOWN_CHARACTER
+DEG tan(45)    → error UNKNOWN_CHARACTER
+DEG tan(90)    → error UNKNOWN_CHARACTER
+RAD log(1000)  → error UNKNOWN_CHARACTER
+RAD ln(e)      → error UNKNOWN_CHARACTER
+RAD sqrt(16)   → error UNKNOWN_CHARACTER
+RAD abs(-3)    → error UNKNOWN_CHARACTER
+RAD 2*pi       → error UNKNOWN_CHARACTER
+RAD sqrt(-1)   → error UNKNOWN_CHARACTER
+RAD log(0)     → error UNKNOWN_CHARACTER
+RAD ln(-1)     → error UNKNOWN_CHARACTER
+DEG asin(2)    → error UNKNOWN_CHARACTER
+DEG acos(-2)   → error UNKNOWN_CHARACTER
+RAD foo(1)     → error UNKNOWN_CHARACTER
+RAD 2+3*4      → ok 14
+exit=0
