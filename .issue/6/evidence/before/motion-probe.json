@@ -1,0 +1,6 @@
+{
+  "prefersReducedMotion": true,
+  "transitionDuration": "0.3s",
+  "animationDuration": "1s",
+  "animationIterationCount": "infinite"
+}
