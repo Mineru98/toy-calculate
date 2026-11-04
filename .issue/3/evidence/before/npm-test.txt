@@ -1,0 +1,16 @@
+$ npm run test  # 6312d07
+
+> toy-calculate@0.0.0 test
+> vitest run --passWithNoTests
+
+
+ RUN  v2.1.9 /home/mineru/workspace/toy-calculate-issue-3
+
+ ✓ src/engine/engine.test.ts (41 tests) 70ms
+
+ Test Files  1 passed (1)
+      Tests  41 passed (41)
+   Start at  02:40:53
+   Duration  383ms (transform 62ms, setup 0ms, collect 67ms, tests 70ms, environment 0ms, prepare 59ms)
+
+exit=0
