@@ -8,8 +8,8 @@
 
 | 뷰포트 | 전 | 후 |
 | --- | --- | --- |
-| 1280 | ![키패드 1280 - 전](BEFORE_keypad-1280) | ![키패드 1280 - 후](AFTER_keypad-1280) |
-| 360 | ![키패드 360 - 전](BEFORE_keypad-360) | ![키패드 360 - 후](AFTER_keypad-360) |
+| 1280 | ![키패드 1280 - 전](https://raw.githubusercontent.com/Mineru98/toy-calculate/main/.issue/8/evidence/before/keypad-1280.webp) | ![키패드 1280 - 후](https://raw.githubusercontent.com/Mineru98/toy-calculate/main/.issue/8/evidence/after/keypad-1280.webp) |
+| 360 | ![키패드 360 - 전](https://raw.githubusercontent.com/Mineru98/toy-calculate/main/.issue/8/evidence/before/keypad-360.webp) | ![키패드 360 - 후](https://raw.githubusercontent.com/Mineru98/toy-calculate/main/.issue/8/evidence/after/keypad-360.webp) |
 
 빨간 박스가 변경 구간입니다. 전에는 공학 키가 없어 박스는 `.calculator` 전체, 후에는 새로 생긴 `.calculator__scientific` 입니다.
 
@@ -17,9 +17,9 @@
 
 | 상태 | 전 | 후 |
 | --- | --- | --- |
-| DEG · `sin(90) =` | ![sin90 DEG - 전](BEFORE_sin90-deg-1280) | ![sin90 DEG - 후](AFTER_sin90-deg-1280) |
-| 위 상태에서 RAD 로 토글 | ![sin90 RAD - 전](BEFORE_sin90-rad-1280) | ![sin90 RAD - 후](AFTER_sin90-rad-1280) |
-| `sqrt(−1) =` | ![sqrt 음수 - 전](BEFORE_sqrt-neg-1280) | ![sqrt 음수 - 후](AFTER_sqrt-neg-1280) |
+| DEG · `sin(90) =` | ![sin90 DEG - 전](https://raw.githubusercontent.com/Mineru98/toy-calculate/main/.issue/8/evidence/before/sin90-deg-1280.webp) | ![sin90 DEG - 후](https://raw.githubusercontent.com/Mineru98/toy-calculate/main/.issue/8/evidence/after/sin90-deg-1280.webp) |
+| 위 상태에서 RAD 로 토글 | ![sin90 RAD - 전](https://raw.githubusercontent.com/Mineru98/toy-calculate/main/.issue/8/evidence/before/sin90-rad-1280.webp) | ![sin90 RAD - 후](https://raw.githubusercontent.com/Mineru98/toy-calculate/main/.issue/8/evidence/after/sin90-rad-1280.webp) |
+| `sqrt(−1) =` | ![sqrt 음수 - 전](https://raw.githubusercontent.com/Mineru98/toy-calculate/main/.issue/8/evidence/before/sqrt-neg-1280.webp) | ![sqrt 음수 - 후](https://raw.githubusercontent.com/Mineru98/toy-calculate/main/.issue/8/evidence/after/sqrt-neg-1280.webp) |
 
 전에는 공학 키·토글이 없어 해당 상태를 만들 수 없으므로 기본 화면이고 박스는 `.calculator` 입니다. 후에는 DEG `1` → RAD `0.893996663600558`(`.calculator__display`), `sqrt(-1) 는 정의역 밖입니다`(`.calculator__result`)에 박스를 그렸습니다.
 
@@ -32,7 +32,7 @@
 
 ## 검증
 
-- `npm test` (149 passed) / `npm run typecheck` / `npm run build` 로컬 통과 — 출력: [verify.txt](VERIFY_URL)
+- `npm test` (149 passed) / `npm run typecheck` / `npm run build` 로컬 통과 — 출력: [verify.txt](https://github.com/Mineru98/toy-calculate/blob/main/.issue/8/evidence/after/verify.txt)
 - Playwright 키패드 클릭: DEG `sin(90)` → `1`, 토글 RAD → `0.893996663600558`, `sqrt(−1)` → 오류 줄, `2^10+4!+50%+log(100)+ln(e)+abs(−π)` → `1054.64159265359`, 360px 가로 넘침 없음 (verify.txt)
 - 뷰포트 1280x800 · 360x740, 라이트
 
