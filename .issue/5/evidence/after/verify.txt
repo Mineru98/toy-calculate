@@ -1,0 +1,64 @@
+$ npm test
+
+> toy-calculate@0.0.0 test
+> vitest run --passWithNoTests
+
+
+ RUN  v2.1.9 /home/mineru/workspace/toy-calculate-issue-5
+
+ ✓ src/engine/engine.test.ts (41 tests) 67ms
+
+ Test Files  1 passed (1)
+      Tests  41 passed (41)
+   Start at  02:41:34
+   Duration  370ms (transform 63ms, setup 0ms, collect 68ms, tests 67ms, environment 0ms, prepare 60ms)
+
+exit=0
+
+$ npm run typecheck
+
+> toy-calculate@0.0.0 typecheck
+> tsc --noEmit
+
+exit=0
+
+$ npm run build
+
+> toy-calculate@0.0.0 build
+> tsc --noEmit && vite build
+
+vite v5.4.21 building for production...
+transforming...
+✓ 4 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                 0.40 kB │ gzip: 0.27 kB
+dist/assets/index-Cmt-aA08.css  4.09 kB │ gzip: 1.20 kB
+dist/assets/index-BF-SLNLY.js   1.44 kB │ gzip: 0.77 kB
+✓ built in 153ms
+exit=0
+
+$ grep -nE "#[0-9a-fA-F]{3,8}|rgba?\(|[0-9]px" src/styles/button.css
+(일치 없음 — button.css 는 토큰만 사용)
+
+
+$ node shoot.mjs (Playwright computed style 검사: Tab 포커스·마우스 클릭·변형 색·hover/active·disabled)
+light-360: box=true
+light-1280: box=true
+light-focus-1280: focused={"tag":"BUTTON","text":"×","cls":"btn btn--operator","outline":"solid 3px rgb(30, 27, 75)","offset":"2px"} box=true
+light-click-1280: afterClick={"tag":"BUTTON","text":"7","outlineStyle":"none"}
+light-variants: [{"cls":"btn btn--number","bg":"rgba(255, 255, 255, 0.55)","color":"rgb(30, 27, 75)"},{"cls":"btn btn--operator","bg":"rgba(99, 102, 241, 0.28)","color":"rgb(49, 46, 129)"},{"cls":"btn btn--function","bg":"rgba(30, 27, 75, 0.1)","color":"rgb(55, 48, 163)"},{"cls":"btn btn--accent","bg":"rgb(79, 70, 229)","color":"rgb(255, 255, 255)"}]
+light-state[0] hover=rgba(255, 255, 255, 0.75) active=rgba(255, 255, 255, 0.75) matrix(0.96, 0, 0, 0.96, 0, 0)
+light-state[1] hover=rgba(99, 102, 241, 0.42) active=rgba(99, 102, 241, 0.42) matrix(0.96, 0, 0, 0.96, 0, 0)
+light-state[2] hover=rgba(30, 27, 75, 0.18) active=rgba(30, 27, 75, 0.18) matrix(0.96, 0, 0, 0.96, 0, 0)
+light-state[3] hover=rgb(67, 56, 202) active=rgb(67, 56, 202) matrix(0.96, 0, 0, 0.96, 0, 0)
+light-disabled: ["btn btn--number opacity=0.45 cursor=not-allowed","btn btn--operator opacity=0.45 cursor=not-allowed","btn btn--function opacity=0.45 cursor=not-allowed","btn btn--accent opacity=0.45 cursor=not-allowed"]
+dark-360: box=true
+dark-1280: box=true
+dark-focus-1280: focused={"tag":"BUTTON","text":"×","cls":"btn btn--operator","outline":"solid 3px rgb(253, 224, 71)","offset":"2px"} box=true
+dark-variants: [{"cls":"btn btn--number","bg":"rgba(255, 255, 255, 0.1)","color":"rgb(245, 243, 255)"},{"cls":"btn btn--operator","bg":"rgba(129, 140, 248, 0.3)","color":"rgb(224, 231, 255)"},{"cls":"btn btn--function","bg":"rgba(15, 23, 42, 0.45)","color":"rgb(199, 210, 254)"},{"cls":"btn btn--accent","bg":"rgb(34, 211, 238)","color":"rgb(8, 51, 68)"}]
+dark-state[0] hover=rgba(255, 255, 255, 0.18) active=rgba(255, 255, 255, 0.18) matrix(0.96, 0, 0, 0.96, 0, 0)
+dark-state[1] hover=rgba(129, 140, 248, 0.45) active=rgba(129, 140, 248, 0.45) matrix(0.96, 0, 0, 0.96, 0, 0)
+dark-state[2] hover=rgba(15, 23, 42, 0.6) active=rgba(15, 23, 42, 0.6) matrix(0.96, 0, 0, 0.96, 0, 0)
+dark-state[3] hover=rgb(103, 232, 249) active=rgb(103, 232, 249) matrix(0.96, 0, 0, 0.96, 0, 0)
+dark-disabled: ["btn btn--number opacity=0.45 cursor=not-allowed","btn btn--operator opacity=0.45 cursor=not-allowed","btn btn--function opacity=0.45 cursor=not-allowed","btn btn--accent opacity=0.45 cursor=not-allowed"]
