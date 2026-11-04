@@ -121,6 +121,8 @@ describe('calculate — 후위 연산자 % !', () => {
     ['171!', 'OVERFLOW'],
     ['1000000000!', 'OVERFLOW'],
     ['6!!', 'OVERFLOW'],
+    ['9'.repeat(400) + '!', 'OVERFLOW'],
+    ['(10^400)!', 'OVERFLOW'],
     ['!5', 'UNEXPECTED_TOKEN'],
     ['%', 'UNEXPECTED_TOKEN'],
     ['2+!', 'UNEXPECTED_TOKEN'],

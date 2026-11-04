@@ -40,6 +40,9 @@ export function evaluate(node: Node): CalcResult {
 }
 
 function factorial(n: number, position: number): CalcResult {
+  if (n === Infinity) {
+    return failure('OVERFLOW', '계승 결과가 너무 큽니다', position);
+  }
   if (!Number.isInteger(n) || n < 0) {
     return failure('DOMAIN_ERROR', '계승은 0 이상의 정수에만 정의됩니다', position);
   }
