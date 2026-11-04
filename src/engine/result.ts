@@ -5,6 +5,8 @@ export type CalcErrorCode =
   | 'UNEXPECTED_TOKEN'
   | 'MISMATCHED_PARENTHESIS'
   | 'DIVISION_BY_ZERO'
+  | 'DOMAIN_ERROR'
+  | 'UNKNOWN_FUNCTION'
   | 'TOO_DEEP';
 
 export interface CalcError {

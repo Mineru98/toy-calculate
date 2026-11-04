@@ -1,12 +1,19 @@
 import { evaluate } from './evaluate';
+import type { AngleMode } from './functions';
 import { parse } from './parse';
 import { failure, type CalcResult } from './result';
 import { tokenize } from './tokenize';
 
+export type { AngleMode } from './functions';
 export type { CalcError, CalcErrorCode, CalcFailure, CalcResult, CalcSuccess } from './result';
 
-/** Evaluates an arithmetic expression string. Never throws; errors come back as `{ ok: false }`. */
-export function calculate(expression: string): CalcResult {
+export interface CalcOptions {
+  /** Unit for trigonometric inputs and inverse-trigonometric outputs. Defaults to `'RAD'`. */
+  angleMode?: AngleMode;
+}
+
+/** Evaluates an expression string. Never throws; errors come back as `{ ok: false }`. */
+export function calculate(expression: string, options: CalcOptions = {}): CalcResult {
   if (expression.trim() === '') {
     return failure('EMPTY_INPUT', '수식이 비어 있습니다');
   }
@@ -15,7 +22,7 @@ export function calculate(expression: string): CalcResult {
   try {
     const parsed = parse(lexed.tokens, expression.length);
     if (!parsed.ok) return parsed;
-    return evaluate(parsed.ast);
+    return evaluate(parsed.ast, options.angleMode ?? 'RAD');
   } catch (error) {
     // Parser and evaluator are recursive; pathological nesting can exhaust the call stack.
     if (error instanceof RangeError) {
