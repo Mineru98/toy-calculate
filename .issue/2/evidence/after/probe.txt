@@ -1,0 +1,17 @@
+$ npx vite-node .issue/2/evidence/probe.ts
+# commit 8325574 · 2026-11-05T02:41:50+09:00 · node v24.22.1
+
+50%        {"ok":true,"value":0.5}
+200*10%    {"ok":true,"value":20}
+5!         {"ok":true,"value":120}
+0!         {"ok":true,"value":1}
+(-1)!      {"ok":false,"error":{"code":"DOMAIN_ERROR","message":"계승은 0 이상의 정수에만 정의됩니다","position":4}}
+2.5!       {"ok":false,"error":{"code":"DOMAIN_ERROR","message":"계승은 0 이상의 정수에만 정의됩니다","position":3}}
+171!       {"ok":false,"error":{"code":"OVERFLOW","message":"계승 결과가 너무 큽니다","position":3}}
+-3!        {"ok":true,"value":-6}
+2^3!       {"ok":true,"value":64}
+3!^2       {"ok":true,"value":36}
+2^3^2      {"ok":true,"value":512}
+-2^2       {"ok":true,"value":-4}
+
+# exit=0

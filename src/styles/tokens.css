@@ -8,6 +8,7 @@
   --color-text: #1e1b4b;
   --color-text-muted: #3730a3;
   --color-glass: rgba(255, 255, 255, 0.35);
+  --color-glass-fallback: rgba(255, 255, 255, 0.85);
   --color-glass-border: rgba(255, 255, 255, 0.6);
   --color-shadow: rgba(30, 27, 75, 0.18);
 
@@ -33,6 +34,32 @@
   --space-4: 16px;
   --space-6: 24px;
   --space-8: 32px;
+
+  /* button */
+  --color-btn-number: rgba(255, 255, 255, 0.55);
+  --color-btn-number-hover: rgba(255, 255, 255, 0.75);
+  --color-btn-number-text: var(--color-text);
+  --color-btn-operator: rgba(99, 102, 241, 0.28);
+  --color-btn-operator-hover: rgba(99, 102, 241, 0.42);
+  --color-btn-operator-text: #312e81;
+  --color-btn-function: rgba(30, 27, 75, 0.1);
+  --color-btn-function-hover: rgba(30, 27, 75, 0.18);
+  --color-btn-function-text: var(--color-text-muted);
+  --color-btn-accent: #4f46e5;
+  --color-btn-accent-hover: #4338ca;
+  --color-btn-accent-text: #ffffff;
+  --size-btn: 56px;
+  --font-size-btn: 1.25rem;
+  --opacity-disabled: 0.45;
+  --scale-pressed: 0.96;
+
+  /* focus */
+  --color-focus-ring: #1e1b4b;
+  --color-focus-halo: rgba(255, 255, 255, 0.9);
+  --focus-ring-width: 3px;
+  --focus-ring-offset: 2px;
+  --focus-ring: var(--focus-ring-width) solid var(--color-focus-ring);
+  --shadow-focus-halo: 0 0 0 calc(var(--focus-ring-width) + var(--focus-ring-offset) + 2px) var(--color-focus-halo);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -45,7 +72,21 @@
     --color-text: #f5f3ff;
     --color-text-muted: #c7d2fe;
     --color-glass: rgba(15, 23, 42, 0.4);
+    --color-glass-fallback: rgba(15, 23, 42, 0.88);
     --color-glass-border: rgba(255, 255, 255, 0.18);
     --color-shadow: rgba(0, 0, 0, 0.45);
+
+    --color-btn-number: rgba(255, 255, 255, 0.1);
+    --color-btn-number-hover: rgba(255, 255, 255, 0.18);
+    --color-btn-operator: rgba(129, 140, 248, 0.3);
+    --color-btn-operator-hover: rgba(129, 140, 248, 0.45);
+    --color-btn-operator-text: #e0e7ff;
+    --color-btn-function: rgba(15, 23, 42, 0.45);
+    --color-btn-function-hover: rgba(15, 23, 42, 0.6);
+    --color-btn-accent: #22d3ee;
+    --color-btn-accent-hover: #67e8f9;
+    --color-btn-accent-text: #083344;
+    --color-focus-ring: #fde047;
+    --color-focus-halo: rgba(15, 23, 42, 0.85);
   }
 }

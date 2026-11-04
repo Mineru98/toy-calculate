@@ -6,6 +6,7 @@ export type CalcErrorCode =
   | 'MISMATCHED_PARENTHESIS'
   | 'DIVISION_BY_ZERO'
   | 'DOMAIN_ERROR'
+  | 'OVERFLOW'
   | 'UNKNOWN_FUNCTION'
   | 'TOO_DEEP';
 

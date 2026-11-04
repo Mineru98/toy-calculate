@@ -1,0 +1,17 @@
+$ npx vite-node .issue/2/evidence/probe.ts
+# commit 6312d07 · 2026-11-05T02:40:17+09:00 · node v24.22.1
+
+50%        {"ok":false,"error":{"code":"UNKNOWN_CHARACTER","message":"알 수 없는 문자: '%'","position":2}}
+200*10%    {"ok":false,"error":{"code":"UNKNOWN_CHARACTER","message":"알 수 없는 문자: '%'","position":6}}
+5!         {"ok":false,"error":{"code":"UNKNOWN_CHARACTER","message":"알 수 없는 문자: '!'","position":1}}
+0!         {"ok":false,"error":{"code":"UNKNOWN_CHARACTER","message":"알 수 없는 문자: '!'","position":1}}
+(-1)!      {"ok":false,"error":{"code":"UNKNOWN_CHARACTER","message":"알 수 없는 문자: '!'","position":4}}
+2.5!       {"ok":false,"error":{"code":"UNKNOWN_CHARACTER","message":"알 수 없는 문자: '!'","position":3}}
+171!       {"ok":false,"error":{"code":"UNKNOWN_CHARACTER","message":"알 수 없는 문자: '!'","position":3}}
+-3!        {"ok":false,"error":{"code":"UNKNOWN_CHARACTER","message":"알 수 없는 문자: '!'","position":2}}
+2^3!       {"ok":false,"error":{"code":"UNKNOWN_CHARACTER","message":"알 수 없는 문자: '!'","position":3}}
+3!^2       {"ok":false,"error":{"code":"UNKNOWN_CHARACTER","message":"알 수 없는 문자: '!'","position":1}}
+2^3^2      {"ok":true,"value":512}
+-2^2       {"ok":true,"value":-4}
+
+# exit=0
