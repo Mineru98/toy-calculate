@@ -1,0 +1,14 @@
+
+> toy-calculate@0.0.0 build
+> tsc --noEmit && vite build
+
+vite v5.4.21 building for production...
+transforming...
+✓ 14 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                  0.40 kB │ gzip: 0.27 kB
+dist/assets/index-COvXA87y.css   5.96 kB │ gzip: 1.68 kB
+dist/assets/index-B8zexlSh.js   10.41 kB │ gzip: 4.11 kB
+✓ built in 260ms
+EXIT=0
