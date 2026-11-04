@@ -1,5 +1,6 @@
 import './calculator.css';
 import { formatExpression, initialState, isKeyId, KEYS, press, type CalcState } from './input';
+import { isEditableTarget, keyFromEvent } from './keyboard';
 
 export function mountCalculator(root: HTMLElement): void {
   root.innerHTML = `
@@ -35,6 +36,16 @@ export function mountCalculator(root: HTMLElement): void {
     const button = (event.target as HTMLElement).closest<HTMLButtonElement>('button[data-key]');
     const key = button?.dataset.key;
     if (!key || !isKeyId(key)) return;
+    state = press(state, key);
+    render();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (isEditableTarget(event.target)) return;
+    const key = keyFromEvent(event);
+    if (!key) return;
+    // Stops a focused keypad button from also firing its click on Enter.
+    event.preventDefault();
     state = press(state, key);
     render();
   });
