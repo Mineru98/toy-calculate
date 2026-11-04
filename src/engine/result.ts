@@ -7,6 +7,7 @@ export type CalcErrorCode =
   | 'DIVISION_BY_ZERO'
   | 'DOMAIN_ERROR'
   | 'OVERFLOW'
+  | 'UNKNOWN_FUNCTION'
   | 'TOO_DEEP';
 
 export interface CalcError {

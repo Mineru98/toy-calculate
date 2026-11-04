@@ -1,10 +1,12 @@
 import { failure, type CalcFailure } from './result';
+import type { FunctionName } from './functions';
 import type { Operator, PostfixOperator, Token } from './tokenize';
 
 export type Node =
   | { type: 'number'; value: number }
   | { type: 'negate'; operand: Node }
   | { type: 'postfix'; operator: PostfixOperator; operand: Node; position: number }
+  | { type: 'call'; name: FunctionName; argument: Node; position: number }
   | { type: 'binary'; operator: Operator; left: Node; right: Node; position: number };
 
 class ParseError {
@@ -18,7 +20,7 @@ class ParseError {
  *   unary      := '-' unary | power
  *   power      := postfix ('^' unary)?      (right-associative)
  *   postfix    := primary ('!' | '%')*
- *   primary    := number | '(' expression ')'
+ *   primary    := number | constant | function '(' expression ')' | '(' expression ')'
  * So `-2^2` is `-(2^2)` and `2^-2` is `2^(-2)`.
  * Postfix binds tightest: `-3!` is `-(3!)`, `2^3!` is `2^(3!)`, `3!^2` is `(3!)^2`.
  */
@@ -84,21 +86,20 @@ export function parse(tokens: Token[], inputLength: number): { ok: true; ast: No
         ? fail('MISMATCHED_PARENTHESIS', "닫는 괄호 ')' 가 없습니다", inputLength)
         : fail('UNEXPECTED_TOKEN', '수식 끝에 피연산자가 빠졌습니다', inputLength);
     }
-    if (token.type === 'number') {
+    if (token.type === 'number' || token.type === 'constant') {
       index++;
       return { type: 'number', value: token.value };
     }
-    if (token.type === 'paren' && token.value === '(') {
+    if (token.type === 'function') {
       index++;
-      depth++;
-      const inner = expression();
-      const closing = peek();
-      if (closing?.type !== 'paren' || closing.value !== ')') {
-        return fail('MISMATCHED_PARENTHESIS', "닫는 괄호 ')' 가 없습니다", token.position);
+      const open = peek();
+      if (open?.type !== 'paren' || open.value !== '(') {
+        return fail('UNEXPECTED_TOKEN', `함수 '${token.name}' 뒤에 '(' 가 필요합니다`, open?.position ?? inputLength);
       }
-      index++;
-      depth--;
-      return inner;
+      return { type: 'call', name: token.name, argument: parenthesized(), position: token.position };
+    }
+    if (token.type === 'paren' && token.value === '(') {
+      return parenthesized();
     }
     if (token.type === 'paren') {
       return depth > 0
@@ -106,6 +107,20 @@ export function parse(tokens: Token[], inputLength: number): { ok: true; ast: No
         : fail('MISMATCHED_PARENTHESIS', "짝이 없는 닫는 괄호 ')'", token.position);
     }
     return fail('UNEXPECTED_TOKEN', `피연산자 자리에 연산자 '${token.value}' 가 왔습니다`, token.position);
+  }
+
+  /** Parses `'(' expression ')'` starting at the current '(' token. */
+  function parenthesized(): Node {
+    const open = tokens[index++];
+    depth++;
+    const inner = expression();
+    const closing = peek();
+    if (closing?.type !== 'paren' || closing.value !== ')') {
+      return fail('MISMATCHED_PARENTHESIS', "닫는 괄호 ')' 가 없습니다", open.position);
+    }
+    index++;
+    depth--;
+    return inner;
   }
 
   try {
