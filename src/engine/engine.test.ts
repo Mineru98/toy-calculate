@@ -81,3 +81,66 @@ describe('calculate — 오류 결과 (예외 없음)', () => {
     expect(calculate('8/0')).toMatchObject({ ok: false, error: { position: 1 } });
   });
 });
+
+describe('calculate — 후위 연산자 % !', () => {
+  it.each([
+    ['50%', 0.5],
+    ['200*10%', 20],
+    ['50%%', 0.005],
+    ['(20+30)%', 0.5],
+    ['5!', 120],
+    ['0!', 1],
+    ['1!', 1],
+    ['3!!', 720],
+    ['170!', 7.257415615307994e306],
+    ['3!+1', 7],
+    ['2*3!', 12],
+    ['(2+1)!', 6],
+    ['5!%', 1.2],
+  ])('%s = %d', (expression, expected) => {
+    expect(valueOf(expression)).toBe(expected);
+  });
+
+  it.each([
+    ['-3!', -6],
+    ['-50%', -0.5],
+    ['2^3!', 64],
+    ['3!^2', 36],
+    ['2^-3!', 2 ** -6],
+    ['-2^2!', -4],
+    ['2^200%', 4],
+  ])('우선순위: %s = %d (후위가 ^·단항 마이너스보다 먼저)', (expression, expected) => {
+    expect(valueOf(expression)).toBe(expected);
+  });
+
+  it.each<[string, CalcErrorCode]>([
+    ['(-1)!', 'DOMAIN_ERROR'],
+    ['(-3)!', 'DOMAIN_ERROR'],
+    ['2.5!', 'DOMAIN_ERROR'],
+    ['50%!', 'DOMAIN_ERROR'],
+    ['171!', 'OVERFLOW'],
+    ['1000000000!', 'OVERFLOW'],
+    ['6!!', 'OVERFLOW'],
+    ['9'.repeat(400) + '!', 'OVERFLOW'],
+    ['(10^400)!', 'OVERFLOW'],
+    ['!5', 'UNEXPECTED_TOKEN'],
+    ['%', 'UNEXPECTED_TOKEN'],
+    ['2+!', 'UNEXPECTED_TOKEN'],
+    ['(!)', 'UNEXPECTED_TOKEN'],
+    ['5!3', 'UNEXPECTED_TOKEN'],
+  ])("'%s' → %s", (expression, code) => {
+    expect(() => calculate(expression)).not.toThrow();
+    expect(errorCodeOf(expression)).toBe(code);
+  });
+
+  it('계승 오류는 ! 위치를 돌려준다', () => {
+    expect(calculate('(-1)!')).toMatchObject({ ok: false, error: { code: 'DOMAIN_ERROR', position: 4 } });
+    expect(calculate('1+171!')).toMatchObject({ ok: false, error: { code: 'OVERFLOW', position: 5 } });
+  });
+
+  it('깊게 이어진 후위 연산자는 TOO_DEEP', () => {
+    const expression = '1' + '%'.repeat(20000);
+    expect(() => calculate(expression)).not.toThrow();
+    expect(errorCodeOf(expression)).toBe('TOO_DEEP');
+  });
+});

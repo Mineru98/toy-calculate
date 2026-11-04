@@ -1,9 +1,10 @@
 import { failure, type CalcFailure } from './result';
-import type { Operator, Token } from './tokenize';
+import type { Operator, PostfixOperator, Token } from './tokenize';
 
 export type Node =
   | { type: 'number'; value: number }
   | { type: 'negate'; operand: Node }
+  | { type: 'postfix'; operator: PostfixOperator; operand: Node; position: number }
   | { type: 'binary'; operator: Operator; left: Node; right: Node; position: number };
 
 class ParseError {
@@ -15,9 +16,11 @@ class ParseError {
  *   expression := term (('+' | '-') term)*
  *   term       := unary (('*' | '/') unary)*
  *   unary      := '-' unary | power
- *   power      := primary ('^' unary)?      (right-associative)
+ *   power      := postfix ('^' unary)?      (right-associative)
+ *   postfix    := primary ('!' | '%')*
  *   primary    := number | '(' expression ')'
  * So `-2^2` is `-(2^2)` and `2^-2` is `2^(-2)`.
+ * Postfix binds tightest: `-3!` is `-(3!)`, `2^3!` is `2^(3!)`, `3!^2` is `(3!)^2`.
  */
 export function parse(tokens: Token[], inputLength: number): { ok: true; ast: Node } | CalcFailure {
   let index = 0;
@@ -57,12 +60,21 @@ export function parse(tokens: Token[], inputLength: number): { ok: true; ast: No
   }
 
   function power(): Node {
-    const base = primary();
+    const base = postfix();
     if (isOperator(peek(), '^')) {
       const token = tokens[index++] as Extract<Token, { type: 'operator' }>;
       return { type: 'binary', operator: '^', left: base, right: unary(), position: token.position };
     }
     return base;
+  }
+
+  function postfix(): Node {
+    let operand = primary();
+    for (let token = peek(); token?.type === 'postfix'; token = peek()) {
+      index++;
+      operand = { type: 'postfix', operator: token.value, operand, position: token.position };
+    }
+    return operand;
   }
 
   function primary(): Node {

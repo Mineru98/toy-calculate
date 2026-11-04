@@ -9,6 +9,12 @@ export function evaluate(node: Node): CalcResult {
       const operand = evaluate(node.operand);
       return operand.ok ? success(-operand.value) : operand;
     }
+    case 'postfix': {
+      const operand = evaluate(node.operand);
+      if (!operand.ok) return operand;
+      if (node.operator === '%') return success(operand.value / 100);
+      return factorial(operand.value, node.position);
+    }
     case 'binary': {
       const left = evaluate(node.left);
       if (!left.ok) return left;
@@ -31,4 +37,21 @@ export function evaluate(node: Node): CalcResult {
       }
     }
   }
+}
+
+function factorial(n: number, position: number): CalcResult {
+  if (n === Infinity) {
+    return failure('OVERFLOW', '계승 결과가 너무 큽니다', position);
+  }
+  if (!Number.isInteger(n) || n < 0) {
+    return failure('DOMAIN_ERROR', '계승은 0 이상의 정수에만 정의됩니다', position);
+  }
+  let product = 1;
+  for (let k = 2; k <= n; k++) {
+    product *= k;
+    if (!Number.isFinite(product)) {
+      return failure('OVERFLOW', '계승 결과가 너무 큽니다', position);
+    }
+  }
+  return success(product);
 }
