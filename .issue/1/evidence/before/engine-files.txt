@@ -1,0 +1,5 @@
+$ ls src src/engine
+ls: cannot access 'src/engine': No such file or directory
+src:
+main.ts
+# exit=2

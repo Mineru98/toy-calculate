@@ -1,0 +1,2 @@
+$ grep -rnE '\beval\b|new Function|\bFunction\(' src
+# exit=1 (1 = 매치 없음)
