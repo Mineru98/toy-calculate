@@ -90,7 +90,10 @@ function evaluateLine(expression: string, angleMode: AngleMode): ResultLine {
     : { kind: 'error', text: outcome.error.message };
 }
 
-export function press(state: CalcState, key: KeyId): CalcState {
+/** Engine characters typed from the keyboard that have no keypad button yet. */
+export type InputKey = KeyId | '^' | '%' | '!';
+
+export function press(state: CalcState, key: InputKey): CalcState {
   switch (key) {
     case 'clear':
       return { ...initialState, angleMode: state.angleMode };

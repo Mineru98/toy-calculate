@@ -1,0 +1,68 @@
+$ npm test
+
+> toy-calculate@0.0.0 test
+> vitest run --passWithNoTests
+
+
+ RUN  v2.1.9 /home/mineru/workspace/toy-calculate-issue-11
+
+ ✓ src/ui/history.test.ts (8 tests) 7ms
+ ✓ src/ui/input.test.ts (13 tests) 8ms
+ ✓ src/engine/engine.test.ts (125 tests) 141ms
+
+ Test Files  3 passed (3)
+      Tests  146 passed (146)
+   Start at  04:30:07
+   Duration  572ms (transform 177ms, setup 0ms, collect 296ms, tests 156ms, environment 1ms, prepare 217ms)
+
+
+$ npm run typecheck
+
+> toy-calculate@0.0.0 typecheck
+> tsc --noEmit
+
+
+$ npm run build
+
+> toy-calculate@0.0.0 build
+> tsc --noEmit && vite build
+
+vite v5.4.21 building for production...
+transforming...
+✓ 14 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                 0.40 kB │ gzip: 0.27 kB
+dist/assets/index-k3TIWzt9.css  6.70 kB │ gzip: 1.81 kB
+dist/assets/index-2NWkCqIJ.js   9.86 kB │ gzip: 3.92 kB
+✓ built in 185ms
+
+$ playwright 브라우저 시나리오 (dev 서버)
+--- viewport 1280x800
+초기 빈 안내 표시: true
+초기 전체 삭제 disabled: true
+계산 4건(오류 1) 후 기록: ["7−10= -3","(2+3)×4= 20","12×3= 36"]
+2번째 항목 클릭 후 수식/결과: ["(2+3)×4",""]
+= 재계산 결과: "20"
+재계산 후 기록 맨 위: "(2+3)×4= 20"
+Tab 포커스 대상: "(2+3)×4= 20"
+Enter 선택 후 수식: "(2+3)×4"
+가로 넘침: false
+패널 위치 [x,y,w]: [[".calculator",320,32,308],[".history",652,32,308]]
+전체 삭제 후 항목 수: 0
+전체 삭제 후 빈 안내 표시: true
+51회 계산 후 항목 수: 50
+맨 위 / 맨 아래: ["51= 51","2= 2"]
+--- viewport 360x740
+초기 빈 안내 표시: true
+초기 전체 삭제 disabled: true
+계산 4건(오류 1) 후 기록: ["7−10= -3","(2+3)×4= 20","12×3= 36"]
+2번째 항목 클릭 후 수식/결과: ["(2+3)×4",""]
+= 재계산 결과: "20"
+재계산 후 기록 맨 위: "(2+3)×4= 20"
+Tab 포커스 대상: "(2+3)×4= 20"
+Enter 선택 후 수식: "(2+3)×4"
+가로 넘침: false
+패널 위치 [x,y,w]: [[".calculator",26,17,308],[".history",26,535,308]]
+전체 삭제 후 항목 수: 0
+전체 삭제 후 빈 안내 표시: true
