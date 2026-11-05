@@ -1,6 +1,6 @@
 import './calculator.css';
 import { clearHistory, record, type HistoryEntry } from './history';
-import { formatExpression, initialState, isKeyId, KEYS, press, type CalcState } from './input';
+import { formatExpression, initialState, isKeyId, KEYS, press, type CalcState, type InputKey } from './input';
 import { isEditableTarget, keyFromEvent } from './keyboard';
 
 export function mountCalculator(root: HTMLElement): void {
@@ -70,16 +70,21 @@ export function mountCalculator(root: HTMLElement): void {
     historyClear.disabled = history.length === 0;
   };
 
-  keypad.addEventListener('click', (event) => {
-    const button = (event.target as HTMLElement).closest<HTMLButtonElement>('button[data-key]');
-    const key = button?.dataset.key;
-    if (!key || !isKeyId(key)) return;
+  /** Shared by keypad clicks and keyboard input: a successful `=` also lands in the history. */
+  const apply = (key: InputKey) => {
     state = press(state, key);
     render();
     if (key === 'equals') {
       history = record(history, state);
       renderHistory();
     }
+  };
+
+  keypad.addEventListener('click', (event) => {
+    const button = (event.target as HTMLElement).closest<HTMLButtonElement>('button[data-key]');
+    const key = button?.dataset.key;
+    if (!key || !isKeyId(key)) return;
+    apply(key);
   });
 
   historyList.addEventListener('click', (event) => {
@@ -99,10 +104,13 @@ export function mountCalculator(root: HTMLElement): void {
     if (isEditableTarget(event.target)) return;
     const key = keyFromEvent(event);
     if (!key) return;
+    // Enter on a non-keypad button (history item, clear, ...) keeps its own activation.
+    if (event.key === 'Enter' && event.target instanceof HTMLElement && event.target.matches('button:not([data-key])')) return;
     // Stops a focused keypad button from also firing its click on Enter.
     event.preventDefault();
-    state = press(state, key);
-    render();
+    // A held Enter/= auto-repeats; only the first press computes and records.
+    if (event.repeat && key === 'equals') return;
+    apply(key);
   });
 
   render();
