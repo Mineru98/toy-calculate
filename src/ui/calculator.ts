@@ -71,6 +71,8 @@ export function mountCalculator(root: HTMLElement): void {
     expressionEl.textContent = formatExpression(state.expression);
     resultEl.textContent = state.result?.text ?? '';
     resultEl.classList.toggle('calculator__result--error', state.result?.kind === 'error');
+    // A long expression scrolls inside the display; keep the latest input in view.
+    expressionEl.scrollTop = expressionEl.scrollHeight;
     memoryEl.hidden = memory === null;
     memoryEl.textContent = memory === null ? '' : `M ${formatExpression(String(memory))}`;
     angleEl.textContent = state.angleMode;
