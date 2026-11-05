@@ -1,0 +1,32 @@
+
+> toy-calculate@0.0.0 test
+> vitest run --passWithNoTests
+
+
+ RUN  v2.1.9 /home/mineru/workspace/toy-calculate-issue-11
+
+ ✓ src/ui/input.test.ts (13 tests) 7ms
+ ✓ src/engine/engine.test.ts (125 tests) 101ms
+
+ Test Files  2 passed (2)
+      Tests  138 passed (138)
+   Start at  04:27:27
+   Duration  451ms (transform 131ms, setup 0ms, collect 207ms, tests 108ms, environment 0ms, prepare 140ms)
+
+
+> toy-calculate@0.0.0 typecheck
+> tsc --noEmit
+
+
+> toy-calculate@0.0.0 build
+> tsc --noEmit && vite build
+
+vite v5.4.21 building for production...
+transforming...
+✓ 13 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                 0.40 kB │ gzip: 0.27 kB
+dist/assets/index-CXfcgZbe.css  5.49 kB │ gzip: 1.61 kB
+dist/assets/index-BkBqDE2B.js   8.37 kB │ gzip: 3.44 kB
+✓ built in 189ms
