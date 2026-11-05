@@ -1,5 +1,5 @@
 import './calculator.css';
-import { clearHistory, record, type HistoryEntry } from './history';
+import { clearHistory, loadHistory, record, saveHistory, type HistoryEntry } from './history';
 import {
   formatExpression,
   initialState,
@@ -65,7 +65,7 @@ export function mountCalculator(root: HTMLElement): void {
   const storage = browserStorage();
   let state: CalcState = initialState;
   let memory = loadMemory(storage);
-  let history: readonly HistoryEntry[] = [];
+  let history: readonly HistoryEntry[] = loadHistory(storage);
 
   const render = () => {
     expressionEl.textContent = formatExpression(state.expression);
@@ -105,7 +105,9 @@ export function mountCalculator(root: HTMLElement): void {
     state = press(state, key);
     render();
     if (key === 'equals') {
-      history = record(history, state);
+      const next = record(history, state);
+      if (next !== history) saveHistory(storage, next);
+      history = next;
       renderHistory();
     }
   };
@@ -142,6 +144,7 @@ export function mountCalculator(root: HTMLElement): void {
 
   historyClear.addEventListener('click', () => {
     history = clearHistory();
+    saveHistory(storage, history);
     renderHistory();
   });
 
