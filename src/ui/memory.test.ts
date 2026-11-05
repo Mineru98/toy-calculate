@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { calculate } from '../engine';
-import { initialState, press, type CalcState, type KeyId } from './input';
+import { initialState, press, toggleAngleMode, type CalcState, type KeyId } from './input';
 import {
   isMemoryKeyId,
   loadMemory,
@@ -76,10 +76,19 @@ describe('pressMemory — M+ / M-', () => {
   });
 
   it('합이 유한수를 벗어나면 메모리를 바꾸지 않는다', () => {
-    const state: CalcState = { expression: '10^308', result: null };
+    const state: CalcState = { ...initialState, expression: '10^308' };
     expect(calculate(state.expression)).toEqual({ ok: true, value: 1e308 });
     expect(pressMemory(1.7e308, state, 'mplus').memory).toBe(1.7e308);
     expect(pressMemory(-1.7e308, state, 'mminus').memory).toBe(-1.7e308);
+  });
+
+  it('M+ 는 현재 각도 모드로 계산한 값을 더한다', () => {
+    const deg = run(['sin', '9', '0', ')']);
+    expect(deg.angleMode).toBe('DEG');
+    expect(pressMemory(null, deg, 'mplus').memory).toBe(1);
+    const rad = calculate('sin(90)', { angleMode: 'RAD' });
+    expect(rad.ok && rad.value).not.toBe(1);
+    expect(pressMemory(null, toggleAngleMode(deg), 'mplus').memory).toBe(rad.ok && rad.value);
   });
 });
 
@@ -90,7 +99,7 @@ describe('pressMemory — MC / MR', () => {
 
   it('MR 은 메모리 값을 수식 끝에 이어 붙이고 결과 줄을 비운다', () => {
     const step = pressMemory(25, run(['2', '+']), 'mr');
-    expect(step.state).toEqual({ expression: '2+25', result: null });
+    expect(step.state).toEqual({ ...initialState, expression: '2+25', result: null });
     expect(step.memory).toBe(25);
     expect(calculate(step.state.expression)).toEqual({ ok: true, value: 27 });
   });
@@ -103,7 +112,7 @@ describe('pressMemory — MC / MR', () => {
 
   it('결과가 표시된 뒤 MR 은 메모리 값으로 새 수식을 시작한다', () => {
     const step = pressMemory(25, run(['2', '+', '3', 'equals']), 'mr');
-    expect(step.state).toEqual({ expression: '25', result: null });
+    expect(step.state).toEqual({ ...initialState, expression: '25', result: null });
   });
 
   it('수식 끝이 숫자면 MR 은 그 숫자를 메모리 값으로 바꾼다', () => {
@@ -114,6 +123,18 @@ describe('pressMemory — MC / MR', () => {
   it('수식 끝이 닫힌 피연산자()·!·%)면 MR 은 아무것도 하지 않는다', () => {
     const state = run(['(', '2', ')']);
     expect(pressMemory(25, state, 'mr')).toEqual({ memory: 25, state });
+  });
+
+  it('수식 끝이 상수(π·e)면 MR 은 아무것도 하지 않는다', () => {
+    for (const keys of [['2', '*', 'pi'], ['e']] satisfies KeyId[][]) {
+      const state = run(keys);
+      expect(pressMemory(25, state, 'mr')).toEqual({ memory: 25, state });
+    }
+  });
+
+  it('MR 은 각도 모드를 유지한다', () => {
+    const rad = toggleAngleMode(run(['2', '+']));
+    expect(pressMemory(25, rad, 'mr').state).toEqual({ expression: '2+25', result: null, angleMode: 'RAD' });
   });
 
   it('메모리가 비어 있으면 MR 은 아무것도 하지 않는다', () => {

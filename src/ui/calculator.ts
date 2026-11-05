@@ -25,8 +25,10 @@ export function mountCalculator(root: HTMLElement): void {
     <div class="app-layout">
       <section class="glass calculator" aria-label="계산기">
         <div class="calculator__display">
-          <button type="button" class="calculator__angle"></button>
-          <div class="calculator__memory" aria-label="메모리" hidden></div>
+          <div class="calculator__status">
+            <button type="button" class="calculator__angle"></button>
+            <div class="calculator__memory" aria-label="메모리" hidden></div>
+          </div>
           <div class="calculator__expression" aria-label="수식"></div>
           <output class="calculator__result" aria-live="polite"></output>
         </div>
@@ -124,7 +126,7 @@ export function mountCalculator(root: HTMLElement): void {
     const button = (event.target as HTMLElement).closest<HTMLButtonElement>('button[data-index]');
     const entry = button && history[Number(button.dataset.index)];
     if (!entry) return;
-    state = { expression: entry.expression, result: null };
+    state = { ...state, expression: entry.expression, result: null };
     render();
   });
 
