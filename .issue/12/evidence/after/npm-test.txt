@@ -1,0 +1,19 @@
+
+> toy-calculate@0.0.0 test
+> vitest run --passWithNoTests
+
+
+ RUN  v2.1.9 /home/mineru/workspace/toy-calculate-issue-12
+
+ ✓ src/ui/input.test.ts (24 tests) 16ms
+ ✓ src/ui/memory.test.ts (39 tests) 36ms
+ ✓ src/engine/engine.test.ts (125 tests) 142ms
+ ✓ src/ui/history.test.ts (28 tests) 16ms
+ ✓ src/ui/keyboard.test.ts (9 tests) 8ms
+
+ Test Files  5 passed (5)
+      Tests  225 passed (225)
+   Start at  12:08:45
+   Duration  745ms (transform 221ms, setup 0ms, collect 461ms, tests 217ms, environment 1ms, prepare 346ms)
+
+exit 0

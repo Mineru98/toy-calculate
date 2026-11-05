@@ -1,0 +1,20 @@
+## viewport 360x780
+[reload] 새로고침 전 목록: ["7×6= 42","2+3= 5"]
+[reload] 새로고침 전 저장값: "[{\"expression\":\"7*6\",\"result\":\"42\"},{\"expression\":\"2+3\",\"result\":\"5\"}]"
+[reload] 새로고침 후 목록: ["7×6= 42","2+3= 5"]
+[clear] 전체 삭제 직후 저장값: null
+[clear] 새로고침 후 목록: []
+[corrupted] 저장값 '{broken' 새로고침 후 목록: [], 빈 안내 표시: true
+[corrupted] 이어서 9= 후 목록: ["9= 9"]
+pageerror: 0 []
+[blocked] localStorage 접근 예외 환경 4+4= 후 목록: ["4+4= 8"], pageerror: 0
+## viewport 1280x800
+[reload] 새로고침 전 목록: ["7×6= 42","2+3= 5"]
+[reload] 새로고침 전 저장값: "[{\"expression\":\"7*6\",\"result\":\"42\"},{\"expression\":\"2+3\",\"result\":\"5\"}]"
+[reload] 새로고침 후 목록: ["7×6= 42","2+3= 5"]
+[clear] 전체 삭제 직후 저장값: null
+[clear] 새로고침 후 목록: []
+[corrupted] 저장값 '{broken' 새로고침 후 목록: [], 빈 안내 표시: true
+[corrupted] 이어서 9= 후 목록: ["9= 9"]
+pageerror: 0 []
+[blocked] localStorage 접근 예외 환경 4+4= 후 목록: ["4+4= 8"], pageerror: 0
