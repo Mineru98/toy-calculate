@@ -1,0 +1,17 @@
+
+> toy-calculate@0.0.0 test
+> vitest run --passWithNoTests
+
+
+ RUN  v2.1.9 ~/workspace/toy-calculate-issue-13
+
+ ✓ src/ui/input.test.ts (13 tests) 11ms
+ ✓ src/ui/memory.test.ts (36 tests) 51ms
+ ✓ src/engine/engine.test.ts (125 tests) 213ms
+
+ Test Files  3 passed (3)
+      Tests  174 passed (174)
+   Start at  04:30:19
+   Duration  664ms (transform 210ms, setup 0ms, collect 426ms, tests 274ms, environment 1ms, prepare 270ms)
+
+EXIT=0

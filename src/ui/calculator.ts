@@ -1,6 +1,7 @@
 import './calculator.css';
 import { clearHistory, record, type HistoryEntry } from './history';
 import { formatExpression, initialState, isKeyId, KEYS, press, type CalcState } from './input';
+import { isEditableTarget, keyFromEvent } from './keyboard';
 
 export function mountCalculator(root: HTMLElement): void {
   root.innerHTML = `
@@ -92,6 +93,16 @@ export function mountCalculator(root: HTMLElement): void {
   historyClear.addEventListener('click', () => {
     history = clearHistory();
     renderHistory();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (isEditableTarget(event.target)) return;
+    const key = keyFromEvent(event);
+    if (!key) return;
+    // Stops a focused keypad button from also firing its click on Enter.
+    event.preventDefault();
+    state = press(state, key);
+    render();
   });
 
   render();

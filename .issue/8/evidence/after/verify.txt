@@ -1,0 +1,47 @@
+$ npm test
+
+> toy-calculate@0.0.0 test
+> vitest run --passWithNoTests
+
+
+ RUN  v2.1.9 /home/mineru/workspace/toy-calculate-issue-8
+
+ ✓ src/ui/input.test.ts (24 tests) 15ms
+ ✓ src/engine/engine.test.ts (125 tests) 183ms
+
+ Test Files  2 passed (2)
+      Tests  149 passed (149)
+   Start at  04:29:37
+   Duration  676ms (transform 197ms, setup 0ms, collect 316ms, tests 197ms, environment 0ms, prepare 175ms)
+
+exit=0
+
+$ npm run typecheck
+
+> toy-calculate@0.0.0 typecheck
+> tsc --noEmit
+
+exit=0
+
+$ npm run build
+
+> toy-calculate@0.0.0 build
+> tsc --noEmit && vite build
+
+vite v5.4.21 building for production...
+transforming...
+✓ 13 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                 0.40 kB │ gzip: 0.27 kB
+dist/assets/index-mW813uuO.css  6.12 kB │ gzip: 1.70 kB
+dist/assets/index-KcyLYaUx.js   9.97 kB │ gzip: 3.96 kB
+✓ built in 210ms
+exit=0
+
+
+$ playwright 키패드 클릭 확인 (http://localhost:5178/, chromium, 라이트)
+360x740  sin ( 9 0 ) =                → 모드 DEG, 수식 sin(90), 결과 1, scrollWidth 360 (가로 넘침 없음)
+1280x800 sin ( 9 0 ) = → 토글         → 모드 RAD, 수식 sin(90), 결과 0.893996663600558
+360x740  sqrt ( − 1 ) =               → 수식 sqrt(−1), 결과 줄 오류 "sqrt(-1) 는 정의역 밖입니다", scrollWidth 360
+360x740  2^10+4!+50%+log(100)+ln(e)+abs(−π) = → 결과 1054.64159265359 (모든 공학 키가 엔진 형식으로 입력됨)
