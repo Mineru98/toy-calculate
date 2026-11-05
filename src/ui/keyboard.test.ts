@@ -46,13 +46,13 @@ describe('keyFromEvent — 키 매핑', () => {
 describe('키보드 입력 → press', () => {
   it('(2+3)*4 입력 후 Enter → 20', () => {
     const state = type(['(', '2', '+', '3', ')', '*', '4', 'Enter']);
-    expect(state).toEqual({ expression: '(2+3)*4', result: { kind: 'value', text: '20' } });
+    expect(state).toEqual({ ...initialState, expression: '(2+3)*4', result: { kind: 'value', text: '20' } });
   });
 
   it('Backspace 는 ⌫ 와 같은 결과', () => {
     const typed = type(['1', '2', '+', 'Backspace']);
     expect(typed).toEqual(press(type(['1', '2', '+']), 'backspace'));
-    expect(typed).toEqual({ expression: '12', result: null });
+    expect(typed).toEqual({ ...initialState, expression: '12', result: null });
   });
 
   it('Escape 는 AC 와 같은 결과', () => {

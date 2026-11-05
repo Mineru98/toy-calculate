@@ -39,11 +39,11 @@ export function pressMemory(memory: Memory, state: CalcState, key: MemoryKeyId):
     case 'mr': {
       if (memory === null) return { memory, state };
       const expression = recallInto(state, toOperand(memory));
-      return expression === null ? { memory, state } : { memory, state: { expression, result: null } };
+      return expression === null ? { memory, state } : { memory, state: { ...state, expression, result: null } };
     }
     case 'mplus':
     case 'mminus': {
-      const outcome = calculate(state.expression);
+      const outcome = calculate(state.expression, { angleMode: state.angleMode });
       if (!outcome.ok) return { memory, state };
       const next = (memory ?? 0) + (key === 'mplus' ? outcome.value : -outcome.value);
       return Number.isFinite(next) ? { memory: next, state } : { memory, state };
@@ -53,13 +53,13 @@ export function pressMemory(memory: Memory, state: CalcState, key: MemoryKeyId):
 
 /**
  * Places a recalled operand: a shown result starts a new expression, a trailing
- * number is replaced, and a closed operand (`)`, `!`, `%`) cannot take a value
+ * number is replaced, and a closed operand (`)`, `!`, `%`, `π`, `e`) cannot take a value
  * without an operator, so it yields `null` (no change).
  */
 function recallInto(state: CalcState, operand: string): string | null {
   if (state.result !== null) return operand;
   if (/[\d.]$/.test(state.expression)) return state.expression.replace(/[\d.]+$/, operand);
-  if (/[)!%]$/.test(state.expression)) return null;
+  if (/[)!%πe]$/.test(state.expression)) return null;
   return state.expression + operand;
 }
 
