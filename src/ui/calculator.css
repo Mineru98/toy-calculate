@@ -135,3 +135,29 @@
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
+
+.calculator__memory {
+  align-self: flex-start;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  color: var(--color-text-muted);
+  font-size: calc(var(--font-size-btn) * 0.7);
+  font-variant-numeric: tabular-nums;
+}
+
+.calculator__memory[hidden] {
+  display: none;
+}
+
+.calculator__memory-keys {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.calculator__memory-keys .btn {
+  min-width: 0;
+  min-height: calc(var(--size-btn) * 0.75);
+  padding-inline: 0;
+  font-size: calc(var(--font-size-btn) * 0.8);
+}
