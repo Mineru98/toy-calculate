@@ -29,6 +29,8 @@
 
 .calculator__angle {
   flex: none;
+  min-width: var(--size-touch);
+  min-height: var(--size-touch);
   padding: var(--space-1) var(--space-2);
   font: inherit;
   font-size: calc(var(--font-size-btn) * 0.7);
@@ -54,6 +56,9 @@
 
 .calculator__expression {
   min-height: 1.5em;
+  max-height: calc(1.5em * 3);
+  overflow-y: auto;
+  line-height: 1.5;
   color: var(--color-text-muted);
   font-size: var(--font-size-btn);
 }
@@ -83,7 +88,7 @@
 }
 
 .calculator__scientific .btn {
-  min-height: calc(var(--size-btn) * 0.75);
+  min-height: max(var(--size-touch), calc(var(--size-btn) * 0.75));
   font-size: calc(var(--font-size-btn) * 0.8);
 }
 
@@ -128,7 +133,7 @@
 }
 
 .history__clear {
-  min-height: 0;
+  min-height: var(--size-touch);
   padding: var(--space-1) var(--space-3);
   font-size: 0.875rem;
 }
@@ -153,7 +158,7 @@
   flex-direction: column;
   align-items: flex-end;
   width: 100%;
-  min-height: 0;
+  min-height: var(--size-touch);
   padding: var(--space-2) var(--space-3);
   box-shadow: none;
   text-align: right;
@@ -196,7 +201,7 @@
 
 .calculator__memory-keys .btn {
   min-width: 0;
-  min-height: calc(var(--size-btn) * 0.75);
+  min-height: max(var(--size-touch), calc(var(--size-btn) * 0.75));
   padding-inline: 0;
   font-size: calc(var(--font-size-btn) * 0.8);
 }

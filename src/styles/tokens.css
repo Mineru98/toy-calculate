@@ -49,6 +49,7 @@
   --color-btn-accent-hover: #4338ca;
   --color-btn-accent-text: #ffffff;
   --size-btn: 56px;
+  --size-touch: 44px;
   --font-size-btn: 1.25rem;
   --opacity-disabled: 0.45;
   --scale-pressed: 0.96;
@@ -60,6 +61,19 @@
   --focus-ring-offset: 2px;
   --focus-ring: var(--focus-ring-width) solid var(--color-focus-ring);
   --shadow-focus-halo: 0 0 0 calc(var(--focus-ring-width) + var(--focus-ring-offset) + 2px) var(--color-focus-halo);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --size-btn: 64px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --size-btn: 72px;
+    --font-size-btn: 1.375rem;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
